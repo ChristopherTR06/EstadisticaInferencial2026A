@@ -1,76 +1,58 @@
-import pandas as pd
+# Descripción de la base de datos: Casas en venta en Toluca
 
-df = pd.read_csv("Casa_toluca_2.csv")
-print("Columns:", df.columns.tolist())
-print("\nShape:", df.shape)
-print("\nHead:\n", df.head(3))
-print("\nInfo/Data Types:\n")
-print(df.info())
-print("\nSummary Statistics:\n", df.describe(include='all'))
-print("\nMissing values:\n", df.isnull().sum())
+## 1. Descripción general
 
-Traceback (most recent call last):
-  File "<xbox-string>", line 3, in <module>
-    df = pd.read_csv("Casa_toluca_2.csv")
-  File "readers.py", line 912, in read_csv
-    return _read(filepath_or_buffer, kwds)
-  File "readers.py", line 577, in _read
-    parser = TextFileReader(filepath_or_buffer, **kwds)
-  File "readers.py", line 1407, in __init__
-    self._engine = self._make_engine(f, self.engine)
-  File "readers.py", line 1661, in _make_engine
-    self.handles = get_handle(
-  File "common.py", line 859, in get_handle
-    handle = open(
-FileNotFoundError: [Errno 2] No such file or directory: 'Casa_toluca_2.csv'
+La base de datos `Casa_toluca.csv` contiene información sobre **2,004 registros de viviendas anunciadas en venta en Toluca de Lerdo, Estado de México**. Incluye datos sobre la ubicación de las propiedades, su área, el número de baños, las habitaciones y el precio de venta.
 
-import os
-print(os.listdir('.'))
+Esta información permite analizar las características de las viviendas, comparar precios e identificar patrones en el mercado inmobiliario de la zona.
 
-['Casa_toluca.csv']
+## 2. Estructura de la base de datos
 
-import pandas as pd
+La base de datos contiene 8 columnas, de las cuales 5 corresponden a características de las propiedades y 3 parecen ser índices generados durante el procesamiento de los datos.
 
-df = pd.read_csv("Casa_toluca.csv")
+| Columna | Descripción | Tipo de dato |
+|---|---|---|
+| `Unnamed: 0.2` | Índice consecutivo del registro. | Entero |
+| `Unnamed: 0` | Índice adicional del registro. | Entero |
+| `Unnamed: 0.1` | Índice adicional del registro. | Entero |
+| `Ubicación` | Dirección o referencia geográfica de la vivienda. | Texto |
+| `Area` | Superficie reportada de la propiedad. | Numérico |
+| `Baños` | Número de baños de la vivienda. | Numérico |
+| `Habitaciones` | Número de habitaciones de la vivienda. | Numérico |
+| `Precio` | Precio de venta anunciado de la propiedad. | Numérico |
 
-# Clean unnamed columns
-cols_to_drop = [c for c in df.columns if 'Unnamed' in c]
-df_clean = df.drop(columns=cols_to_drop)
+## 3. Características de los datos
 
-print("Columns:", df_clean.columns.tolist())
-print("Shape:", df_clean.shape)
-print("\nMissing values:\n", df_clean.isnull().sum())
-print("\nDescriptive Stats:\n", df_clean.describe())
-print("\nSample Data:\n", df_clean.head(5))
+- **Total de registros:** 2,004 viviendas.
+- **Ubicaciones diferentes:** 1,274 valores únicos en la columna `Ubicación`.
+- **Área:** presenta valores faltantes en 283 registros.
+- **Baños:** presenta valores faltantes en 54 registros.
+- **Habitaciones:** presenta valores faltantes en 73 registros.
+- **Precio:** presenta valores faltantes en 5 registros.
 
-Columns: ['Ubicación', 'Area', 'Baños', 'Habitaciones', 'Precio']
-Shape: (2004, 5)
+Los datos también contienen valores extremos en algunas variables, por lo que se recomienda revisar su consistencia antes de realizar análisis estadísticos.
 
-Missing values:
- Ubicación         0
-Area            283
-Baños            54
-Habitaciones     73
-Precio            5
-dtype: int64
+## 4. Posibles aplicaciones
 
-Descriptive Stats:
-                Area        Baños  Habitaciones        Precio
-count   1721.000000  1950.000000   1931.000000  1.999000e+03
-mean     229.525857     2.496923      3.306059  1.690472e+05
-std      337.245195     3.093504      1.512319  4.067087e+05
-min       10.000000     1.000000      1.000000  1.065305e+04
-25%      113.000000     2.000000      3.000000  5.162500e+04
-50%      165.000000     2.000000      3.000000  9.075000e+04
-75%      250.000000     3.000000      4.000000  1.600000e+05
-max    11111.000000   124.000000     40.000000  1.000000e+07
+La base de datos puede utilizarse para:
 
-Sample Data:
-                                                          Ubicación   Area  Baños  Habitaciones    Precio
-0            Casa en Venta Los Serrados\n, Toluca De Lerdo, México  105.0    2.0           3.0  130000.0
-1  Casa en Venta Tierra Y Libertad #114\n, Toluca De Lerdo, México  115.0    2.0           3.0   50800.0
-2                            Casa en Venta Toluca De Lerdo, México  700.0    3.0           3.0  325000.0
-3                           Casa en Venta Granjas, Toluca De Lerdo  390.0    3.0           4.0  275000.0
-4                            Casa en Venta Toluca De Lerdo, México  300.0    4.0           3.0  215000.0
+1. Analizar la distribución de precios de las viviendas.
+2. Estudiar la relación entre el área y el precio de venta.
+3. Comparar los precios según el número de habitaciones y baños.
+4. Identificar las características más frecuentes de las propiedades.
+5. Detectar valores atípicos y registros incompletos.
+6. Desarrollar modelos de aprendizaje automático para estimar precios inmobiliarios.
 
+## 5. Consideraciones para el análisis
 
+Antes de utilizar la información, se recomienda realizar una etapa de limpieza y preparación de datos que incluya:
+
+- Eliminar las columnas de índices redundantes.
+- Tratar los valores faltantes.
+- Verificar los valores extremos de área, baños, habitaciones y precio.
+- Estandarizar los datos de ubicación.
+- Confirmar las unidades de medida del área y la moneda de los precios.
+
+## 6. Conclusión
+
+La base de datos constituye una fuente de información para estudiar el mercado de viviendas en venta en Toluca de Lerdo. Sus variables permiten explorar los factores relacionados con el precio de una propiedad y sirven como punto de partida para análisis estadísticos, visualizaciones y modelos predictivos inmobiliarios.
