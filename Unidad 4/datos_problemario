@@ -1,1 +1,9 @@
-
+Comparacion de cuatro metodos de ensamble.
+Un equipo de mejora, investiga cuatro métodos de ensamble: A, B, C, D. Sobre el tiempo de ensamble en minutos. En primera instancia, la primera estrategia experimental, 
+es aplicar cuatro veces los cuatro métodos de ensamble en orden completamente aleatorio y se obtiene lo siguiente:
+|Metodo de ensamnle |A|B|C|D|
+|------------------ |-|-|-|-|
+|                   |6|7|11|10|
+|                   |8|9|16|12|
+|                   |7|10|11|11|
+|                   |8|8|13|9|
